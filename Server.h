@@ -11,12 +11,12 @@ class Server {
         string name;
     public:
         Server();
-        Server( const Server& server);
+        Server(const Server& server);
         ~Server();
-        Server &operator = (const Server& serveur);
+        Server &operator=(const Server& serveur);
 
         static void consoleWrite(const string &sensortype);
-        void fileWrite();
+        void fileWrite(const std::string& sensorType, const std::string& data);
 };
 
 

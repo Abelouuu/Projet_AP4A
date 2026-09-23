@@ -13,9 +13,9 @@ Server::Server(const Server &server) {
     this->name = server.name;
 }
 
-Server &Server::operator=(const Server &other) {
-    if (this != &other) {
-        this->name = other.name;
+Server &Server::operator=(const Server &server) {
+    if (this != &server) {
+        this->name = server.name;
     }
     return *this;
 }
@@ -38,8 +38,16 @@ void Server::consoleWrite(const string& nomFichier) {
     else {
         std::cout << "Aucun fichier de logs trouve" << std::endl;
     }
-
-
 }
 
+void Server::fileWrite(const std::string& sensorType, const std::string &data) {
+    std::string Filename = sensorType + "_Logs.csv";
+    std::ofstream LogFile;
+    LogFile.open(Filename, std::ios::app);
+
+    if (LogFile.is_open()) {
+        LogFile << data << ";" << std::endl;
+        LogFile.close();
+    }
+}
 
