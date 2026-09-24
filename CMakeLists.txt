@@ -5,4 +5,6 @@ set(CMAKE_CXX_STANDARD 17)
 
 add_executable(ap4atp1 main.cpp
         Server.cpp
-        Server.h)
+        Server.h
+        Scheduler.cpp
+        Scheduler.h)

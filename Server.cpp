@@ -25,10 +25,10 @@ Server::~Server() {
 }
 
 
-void Server::consoleWrite(const string& nomFichier) {
+void Server::consoleWrite(const std::string& nomFichier) {
     std::ifstream logfile(nomFichier);
     if (logfile.is_open()) {
-        string ligne;
+        std::string ligne;
         std::cout<< "[LISTE DES LOGS]"<<std::endl;
         while (getline(logfile, ligne)) {
             std::cout << ligne << std::endl;

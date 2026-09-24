@@ -3,7 +3,7 @@
 #include "Server.h"
 int main() {
     Server serveur1 = Server();
-    Server::consoleWrite("Temp_Logs.txt");
+    Server::consoleWrite("Temperature_Logs.csv");
 
 
     std::cout << "--- Demarrage de la simulation ---" << std::endl;
@@ -15,13 +15,13 @@ int main() {
     std::cout << "Ecriture des donnees des capteurs dans les logs..." << std::endl;
 
     // Simulation d'un capteur de Température (envoie 3 mesures)
-    monServeur.fileWrite("Temperature", "22.5");
-    monServeur.fileWrite("Temperature", "23.1");
-    monServeur.fileWrite("Temperature", "22.8");
+    Server::fileWrite("Temperature", "22.5");
+    Server::fileWrite("Temperature", "23.1");
+    Server::fileWrite("Temperature", "22.8");
 
     // Simulation d'un capteur d'Humidité (envoie 2 mesures)
-    monServeur.fileWrite("Humidity", "45");
-    monServeur.fileWrite("Humidity", "50");
+    Server::fileWrite("Humidity", "45");
+    Server::fileWrite("Humidity", "50");
 
     // 3. Test de la forme de Coplien (Optionnel mais permet de vérifier que ça ne plante pas)
     Server serveurCopie = monServeur; // Appelle le constructeur de copie
