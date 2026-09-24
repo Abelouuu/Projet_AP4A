@@ -7,4 +7,6 @@ add_executable(ap4atp1 main.cpp
         Server.cpp
         Server.h
         Sensor.h
+        Sensor.cpp
+        Sensor.h
         Sensor.cpp)
