@@ -9,9 +9,9 @@ int Sensor::idcounter = 0;
 
 Sensor::Sensor() {
   this->idcounter++;
-  this->id = compteurId;
+  this->id = idcounter;
   this->type = "DefaultSensor";
-  this->measure = 0f;
+  this->measure = 0.0f;
   this->server = nullptr;
 }
 
@@ -23,7 +23,7 @@ Sensor::Sensor(const Sensor &s){
   this->server = s.server;
 }
 
-Snesor& Sensor::operator=(const Sensor &s) {
+Sensor& Sensor::operator=(const Sensor &s) {
   if (this != &s) {
     this->type = s.type;
     this->measure = s.measure;
@@ -36,4 +36,12 @@ Sensor::~Sensor() {}
 std::ostream& operator<<(std::ostream& os, const Sensor& s) {
   os << "[Capteur " << s.type << " | ID: " << s.id << "] Mesure : " << s.measure;
   return os;
+}
+
+void Sensor::update() {
+
+}
+
+void Sensor::execute() {
+
 }

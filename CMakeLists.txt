@@ -8,5 +8,6 @@ add_executable(ap4atp1 main.cpp
         Server.h
         Sensor.h
         Sensor.cpp
-        Sensor.h
-        Sensor.cpp)
+        Scheduler.cpp
+        Scheduler.h
+)
