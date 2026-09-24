@@ -1,3 +1,0 @@
-C:/Users/Myotte-Duquet/Desktop/ProjetAp4a/Projet_AP4A/cmake-build-debug/CMakeFiles/ap4atp1.dir
-C:/Users/Myotte-Duquet/Desktop/ProjetAp4a/Projet_AP4A/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/Myotte-Duquet/Desktop/ProjetAp4a/Projet_AP4A/cmake-build-debug/CMakeFiles/rebuild_cache.dir
