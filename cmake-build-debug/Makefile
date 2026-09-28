@@ -128,6 +128,54 @@ ap4atp1/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/build
 .PHONY : ap4atp1/fast
 
+Scheduler.obj: Scheduler.cpp.obj
+.PHONY : Scheduler.obj
+
+# target to build an object file
+Scheduler.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Scheduler.cpp.obj
+.PHONY : Scheduler.cpp.obj
+
+Scheduler.i: Scheduler.cpp.i
+.PHONY : Scheduler.i
+
+# target to preprocess a source file
+Scheduler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Scheduler.cpp.i
+.PHONY : Scheduler.cpp.i
+
+Scheduler.s: Scheduler.cpp.s
+.PHONY : Scheduler.s
+
+# target to generate assembly for a file
+Scheduler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Scheduler.cpp.s
+.PHONY : Scheduler.cpp.s
+
+Sensor.obj: Sensor.cpp.obj
+.PHONY : Sensor.obj
+
+# target to build an object file
+Sensor.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Sensor.cpp.obj
+.PHONY : Sensor.cpp.obj
+
+Sensor.i: Sensor.cpp.i
+.PHONY : Sensor.i
+
+# target to preprocess a source file
+Sensor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Sensor.cpp.i
+.PHONY : Sensor.cpp.i
+
+Sensor.s: Sensor.cpp.s
+.PHONY : Sensor.s
+
+# target to generate assembly for a file
+Sensor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Sensor.cpp.s
+.PHONY : Sensor.cpp.s
+
 Server.obj: Server.cpp.obj
 .PHONY : Server.obj
 
@@ -185,6 +233,12 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... ap4atp1
+	@echo ... Scheduler.obj
+	@echo ... Scheduler.i
+	@echo ... Scheduler.s
+	@echo ... Sensor.obj
+	@echo ... Sensor.i
+	@echo ... Sensor.s
 	@echo ... Server.obj
 	@echo ... Server.i
 	@echo ... Server.s

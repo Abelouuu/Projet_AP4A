@@ -2,7 +2,6 @@
 #include <iostream>
 #include <fstream>
 
-
 Server::Server() {
     std::cout << "Un serveur vient d'etre initialise"<<std::endl;
     this->name = "ServeurSolide";
@@ -11,11 +10,13 @@ Server::Server() {
 Server::Server(const Server &server) {
     std::cout << "Copie en cours"<<std::endl;
     this->name = server.name;
+    this->measurements = server.measurements;
 }
 
 Server &Server::operator=(const Server &server) {
     if (this != &server) {
         this->name = server.name;
+        this->measurements = server.measurements;
     }
     return *this;
 }
@@ -24,23 +25,18 @@ Server::~Server() {
     std::cout << "Destruction de l'instance Server" <<std::endl;
 }
 
-
-void Server::consoleWrite(const std::string& nomFichier) {
-    std::ifstream logfile(nomFichier);
-    if (logfile.is_open()) {
-        std::string ligne;
-        std::cout<< "[LISTE DES LOGS]"<<std::endl;
-        while (getline(logfile, ligne)) {
-            std::cout << ligne << std::endl;
+void Server::consoleWrite() {
+    std::cout<< "\n[HISTORIQUE DES CAPTEURS]"<<std::endl;
+    for (const auto& pair : this->measurements) {
+        std::cout << "Capteur " << pair.first << " : ";
+        for (float val : pair.second) {
+            std::cout << val << "  ";
         }
-        logfile.close();
-    }
-    else {
-        std::cout << "Aucun fichier de logs trouve" << std::endl;
+        std::cout << std::endl;
     }
 }
 
-void Server::fileWrite(const std::string& sensorType, const std::string &data) {
+void Server::fileWrite(const std::string& sensorType, float data) {
     std::string Filename = sensorType + "_Logs.csv";
     std::ofstream LogFile;
     LogFile.open(Filename, std::ios::app);
@@ -51,3 +47,12 @@ void Server::fileWrite(const std::string& sensorType, const std::string &data) {
     }
 }
 
+void Server::receive(const float measure, const std::string sensorType) {
+    if(this->measurements.find(sensorType) == this->measurements.end()) {
+        std::vector<float> newList;
+        newList.push_back(measure);
+        measurements.insert({sensorType, newList});
+    } else {
+        measurements[sensorType].push_back(measure);
+    }
+}
