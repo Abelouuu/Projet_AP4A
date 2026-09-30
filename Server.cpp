@@ -47,12 +47,18 @@ void Server::fileWrite(const std::string& sensorType, float data) {
     }
 }
 
-void Server::receive(const float measure, const std::string sensorType) {
+void Server::receive(const float measure, const std::string sensorType, int mode) {
     if(this->measurements.find(sensorType) == this->measurements.end()) {
         std::vector<float> newList;
         newList.push_back(measure);
         measurements.insert({sensorType, newList});
     } else {
         measurements[sensorType].push_back(measure);
+    }
+    if (mode == 0) {
+        this->consoleWrite();
+    }
+    else {
+        this->fileWrite(sensorType, measure);
     }
 }

@@ -27,8 +27,8 @@ public:
     Sensor& operator=(const Sensor& s);
     friend std::ostream& operator<<(std::ostream& os, const Sensor& s);
 
-    virtual void update();
-    virtual void execute();
+    virtual void update(int mode);
+    virtual void execute(int mode);
 
     void setServer(Server* s);
 };

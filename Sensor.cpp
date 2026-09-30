@@ -39,15 +39,15 @@ std::ostream& operator<<(std::ostream& os, const Sensor& s) {
   return os;
 }
 
-void Sensor::update() {
+void Sensor::update(int mode) {
   currentTime++;
   if (currentTime >= internalTimeBase) {
     currentTime = 0;
-    this->execute();
+    this->execute(mode);
   }
 }
 
-void Sensor::execute() {
+void Sensor::execute(int mode) {
   // Utilisation de static pour que le générateur aléatoire ne soit instancié qu'une seule fois
   // et ne génère pas la même valeur si execute() est appelé très vite plusieurs fois.
   static std::random_device rd;
@@ -59,7 +59,7 @@ void Sensor::execute() {
   this->measure = distribution(gen);
 
   if (this->server != nullptr) {
-      server->receive(this->measure, this->type);
+      server->receive(this->measure, this->type, mode);
   } else {
       std::cerr << "Attention : Capteur " << this->id << " n'est lié à aucun serveur !" << std::endl;
   }

@@ -7,6 +7,8 @@
 #include "Sensor.h"
 #include <vector>
 
+
+
 class Scheduler {
 private:
     std::vector<Sensor*> sensors{};
@@ -21,7 +23,7 @@ public:
     int get_waiting_time() const; //Getter
     void set_waiting_time(int waiting_time); //Setter
 
-    void simulation(int nb_cycles);
+    void simulation(int nb_cycles) const;
     void add_sensor(Sensor *sensor);
 };
 

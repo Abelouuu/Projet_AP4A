@@ -3,6 +3,7 @@
 #include <thread>
 #include <chrono>
 
+
 Scheduler::Scheduler(): waiting_time(1000) {
     std::cout << "Un schedule vient d'etre initialisé" << std::endl;
 
@@ -64,14 +65,22 @@ void Scheduler::add_sensor(Sensor *sensor) {
     }
 }
 
-void Scheduler::simulation(int nb_cycles) {
+void Scheduler::simulation(int nb_cycles) const {
+    int mode = -1;
+    while (mode != 1 && mode != 0) {
+        std::cout << "Mode d'affichage Console(0) ou File(1): " << std::endl;
+        std::cin >> mode;
+        if (mode != 1 && mode != 0) {
+            std::cout << "Please, enter a valid option" << std::endl;
+        }
+    }
     std::cout << "--Début de la simulation (" << nb_cycles << " cycles)--" << std::endl;
     while (nb_cycles > 0){
         std::cout <<"--" << nb_cycles << " Restant(s)--" << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(this->waiting_time));
         for (Sensor* sensor : this->sensors) {
             if (sensor != nullptr) {
-                sensor->update();
+                sensor->update(mode);
             }
         }
         nb_cycles -= 1;

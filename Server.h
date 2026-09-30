@@ -18,7 +18,7 @@ class Server {
         // Retrait des static et adaptation des paramètres
         void consoleWrite();
         void fileWrite(const std::string& sensorType, float data);
-        void receive(const float measure,const std::string type);
+        void receive(const float measure,const std::string type, int mode);
 };
 
 #endif //AP4ATP1_SERVER_H
