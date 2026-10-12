@@ -83,7 +83,19 @@ void Scheduler::simulation(int nb_cycles) const {
                 sensor->update(mode);
             }
         }
+        if (mode == 0) {
+            for ( Server* server : this->servers) {
+                server->consoleWrite();
+            }
+        }
         nb_cycles -= 1;
     }
 
+}
+
+
+void Scheduler::add_server(Server* server) {
+    if ( server != nullptr) {
+        this->servers.push_back(server);
+    }
 }

@@ -12,6 +12,7 @@
 class Scheduler {
 private:
     std::vector<Sensor*> sensors{};
+    std::vector<Server*> servers{};
     int waiting_time;
 public:
     Scheduler(); //Constructeur par défaut
@@ -25,6 +26,7 @@ public:
 
     void simulation(int nb_cycles) const;
     void add_sensor(Sensor *sensor);
+    void add_server(Server *server);
 };
 
 

@@ -55,10 +55,7 @@ void Server::receive(const std::string measure, const std::string sensorType, in
     } else {
         measurements[sensorType].push_back(measure);
     }
-    if (mode == 0) {
-        this->consoleWrite();
-    }
-    else {
+    if (mode == 1) {
         this->fileWrite(sensorType, measure);
     }
 }
