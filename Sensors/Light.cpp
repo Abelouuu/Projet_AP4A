@@ -37,8 +37,11 @@ void Light::execute(int mode) {
 
     isLightOn = d(gen);
 
-
-    this->measure = std::to_string(isLightOn) + " LUX";
+    if (isLightOn) {
+        this->measure = "Light ON";
+    } else {
+        this->measure = "Light OFF";
+    }
 
     if (this->server != nullptr) {
         server->receive(this->measure, this->type, mode);
