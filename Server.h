@@ -7,7 +7,7 @@
 class Server {
     private:
         std::string name;
-        std::map<std::string, std::vector<float>> measurements;
+        std::map<std::string, std::vector<std::string>> measurements;
 
     public:
         Server();
@@ -17,8 +17,8 @@ class Server {
 
         // Retrait des static et adaptation des paramètres
         void consoleWrite();
-        void fileWrite(const std::string& sensorType, float data);
-        void receive(const float measure,const std::string type, int mode);
+        void fileWrite(const std::string& sensorType, std::string data);
+        void receive(const std::string measure,const std::string type, int mode);
 };
 
 #endif //AP4ATP1_SERVER_H

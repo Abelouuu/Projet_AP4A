@@ -1,15 +1,13 @@
-#include <iostream>
-#include <filesystem>
-#include "Server.h"
+#include "Sensors/Light.h"
 #include "Sensor.h"
 #include "Scheduler.h"
 int main() {
     Server serv1;
 
-    Sensor sensor1;
-    sensor1.setServer(&serv1);
+    Light lightSensor1;
+    lightSensor1.setServer(&serv1);
     Scheduler schedule;
-    schedule.add_sensor(&sensor1);
+    schedule.add_sensor(&lightSensor1);
 
     schedule.simulation(20);
 

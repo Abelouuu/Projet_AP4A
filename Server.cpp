@@ -29,14 +29,14 @@ void Server::consoleWrite() {
     std::cout<< "\n[HISTORIQUE DES CAPTEURS]"<<std::endl;
     for (const auto& pair : this->measurements) {
         std::cout << "Capteur " << pair.first << " : ";
-        for (float val : pair.second) {
+        for (std::string val : pair.second) {
             std::cout << val << "  ";
         }
         std::cout << std::endl;
     }
 }
 
-void Server::fileWrite(const std::string& sensorType, float data) {
+void Server::fileWrite(const std::string& sensorType, std::string data) {
     std::string Filename = sensorType + "_Logs.csv";
     std::ofstream LogFile;
     LogFile.open(Filename, std::ios::app);
@@ -47,9 +47,9 @@ void Server::fileWrite(const std::string& sensorType, float data) {
     }
 }
 
-void Server::receive(const float measure, const std::string sensorType, int mode) {
+void Server::receive(const std::string measure, const std::string sensorType, int mode) {
     if(this->measurements.find(sensorType) == this->measurements.end()) {
-        std::vector<float> newList;
+        std::vector<std::string> newList;
         newList.push_back(measure);
         measurements.insert({sensorType, newList});
     } else {

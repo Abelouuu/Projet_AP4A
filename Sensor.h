@@ -31,6 +31,7 @@ public:
 
     virtual void update(int mode);
     virtual void execute(int mode)=0;
+    virtual Sensor* clone()=0;
 
     void setServer(Server* s);
 };

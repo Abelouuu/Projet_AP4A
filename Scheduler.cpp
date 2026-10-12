@@ -14,7 +14,7 @@ Scheduler::Scheduler(int waiting_time): waiting_time(waiting_time) {
 Scheduler::Scheduler(const Scheduler &scheduler) {
         for (Sensor* sensor : scheduler.sensors) {
             if (sensor != nullptr) { //Si le sensor n'est pas un pointeur nul
-                this->sensors.push_back(new Sensor(*sensor)); //On ajoute à la liste de capteurs chaque capteur avec une nouvelle adresse
+                this->sensors.push_back(sensor->clone()); //On ajoute à la liste de capteurs chaque capteur avec une nouvelle adresse
             }
         }
         this->waiting_time = scheduler.waiting_time;
@@ -40,7 +40,7 @@ Scheduler &Scheduler::operator=(const Scheduler &schedule) {
         this->sensors.clear(); // On vide le tableau des pointeurs
         for (Sensor* sensor: schedule.sensors) {
             if (sensor != nullptr) {
-                this->sensors.push_back(new Sensor(*sensor)); //On copie les sensors dans le bon scheduler avec de nouvelle allocations (Copie profonde)
+                this->sensors.push_back(sensor->clone()); //On copie les sensors dans le bon scheduler avec de nouvelle allocations (Copie profonde)
             }
         }
         this->waiting_time = schedule.waiting_time;

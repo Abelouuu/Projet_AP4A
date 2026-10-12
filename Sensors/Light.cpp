@@ -22,14 +22,20 @@ Light::~Light() {
 
 }
 
-void Light::execute(int mode) {
+Sensor* Light::clone() {
+    return new Light(*this);
+}
 
+void Light::execute(int mode) {
+    float randomValue;
     static std::random_device rd;
     static std::mt19937 gen(rd());
 
     std::uniform_real_distribution<float> distribution(50.0f, 5000.0f);
 
-    this->measure = distribution(gen);
+    randomValue = distribution(gen);
+
+    this->measure = std::to_string(randomValue) + " LUX";
 
     if (this->server != nullptr) {
         server->receive(this->measure, this->type, mode);

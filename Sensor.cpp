@@ -9,7 +9,7 @@
 int Sensor::idcounter = 0;
 
 Sensor::Sensor()
-    : id(++idcounter), type("DefaultSensor"), measure(0.0f), server(nullptr), currentTime(0), internalTimeBase(1) {
+    : id(++idcounter), type("DefaultSensor"), measure(""), server(nullptr), currentTime(0), internalTimeBase(1) {
 
 }
 
@@ -17,7 +17,7 @@ Sensor::Sensor(const Sensor &s)
     : id(++idcounter), type(s.type), measure(s.measure), server(s.server), currentTime(s.currentTime), internalTimeBase(s.internalTimeBase) {
 }
 
-Sensor::Sensor(std::string type) {
+Sensor::Sensor(std::string type): id(++idcounter), type(type), measure(""), server(nullptr), currentTime(0), internalTimeBase(1) {
     this->type = type;
     if (type == "Temperature") {
         this->internalTimeBase = 3;
@@ -56,7 +56,4 @@ void Sensor::update(int mode) {
     currentTime = 0;
     this->execute(mode);
   }
-}
-
-void Sensor::execute(int mode) {
 }
