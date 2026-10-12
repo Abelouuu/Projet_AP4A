@@ -76,6 +76,7 @@ void Scheduler::simulation(int nb_cycles) const {
     }
     std::cout << "--Début de la simulation (" << nb_cycles << " cycles)--" << std::endl;
     while (nb_cycles > 0){
+
         std::cout <<"--" << nb_cycles << " Restant(s)--" << std::endl;
         std::this_thread::sleep_for(std::chrono::milliseconds(this->waiting_time));
         for (Sensor* sensor : this->sensors) {

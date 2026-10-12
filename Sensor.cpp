@@ -23,7 +23,7 @@ Sensor::Sensor(std::string type): id(++idcounter), type(type), measure(""), serv
         this->internalTimeBase = 3;
     }
     if (type == "Light") {
-        this->internalTimeBase = 5;
+        this->internalTimeBase = 2;
     }
     if (type == "Sound") {
         this->internalTimeBase = 4;

@@ -4,6 +4,7 @@
 
 #include "Sound.h"
 
+#include <iomanip>
 #include <random>
 
 Sound::Sound(): Sensor("Sound") {}
@@ -26,10 +27,12 @@ void Sound::execute(int mode) {
      static std::random_device rd;
      static std::mt19937 gen(rd());
 
-     std::uniform_real_distribution<float> distribution(50.0f, 5000.0f);
+     std::uniform_real_distribution<float> distribution(30.0f, 90.0f);
 
      randomvalue = distribution(gen);
-     this->measure = std::to_string(randomvalue )+ "Db";
+     std::ostringstream approxvalue;
+     approxvalue << std::fixed << std::setprecision(2) << randomvalue;
+     this->measure = approxvalue.str()+ "Db";
      if (this->server != nullptr) {
           server->receive(this->measure, this->type, mode);
      } else {

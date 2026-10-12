@@ -10,4 +10,9 @@ add_executable(ap4atp1 main.cpp
         Sensor.cpp
         Scheduler.cpp
         Scheduler.h
+        Sensors/Temperature.cpp
+        Sensors/Temperature.h
+        Sensors/Sound.cpp
+        Sensors/Sound.h
+        Sensors/Light.cpp
 )

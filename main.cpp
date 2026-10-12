@@ -19,7 +19,7 @@ int main() {
     schedule.add_sensor(&tempsensor);
     schedule.add_server(&serv1);
 
-    schedule.simulation(20);
+    schedule.simulation(10);
 
     return 0;
 }
