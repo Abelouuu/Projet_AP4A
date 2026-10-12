@@ -4,6 +4,7 @@
 
 #include "Light.h"
 #include <random>
+#include <iomanip>
 
 Light::Light(): Sensor("Light") {
 
@@ -27,15 +28,17 @@ Sensor* Light::clone() {
 }
 
 void Light::execute(int mode) {
-    float randomValue;
-    static std::random_device rd;
-    static std::mt19937 gen(rd());
+    bool isLightOn;
 
-    std::uniform_real_distribution<float> distribution(50.0f, 5000.0f);
+    std::random_device rd;
+    std::mt19937 gen(rd());
 
-    randomValue = distribution(gen);
+    std::bernoulli_distribution d(0.5);
 
-    this->measure = std::to_string(randomValue) + " LUX";
+    isLightOn = d(gen);
+
+
+    this->measure = std::to_string(isLightOn) + " LUX";
 
     if (this->server != nullptr) {
         server->receive(this->measure, this->type, mode);
