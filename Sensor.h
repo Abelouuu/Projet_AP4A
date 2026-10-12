@@ -19,8 +19,12 @@ private:
     int internalTimeBase;
 
     static int idcounter;
+protected:
+
 public:
+    int a;
     Sensor();
+    Sensor(std::string type);
     Sensor(const Sensor &s);
     virtual ~Sensor();
 

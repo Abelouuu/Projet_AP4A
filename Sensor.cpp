@@ -17,6 +17,17 @@ Sensor::Sensor(const Sensor &s)
     : id(++idcounter), type(s.type), measure(s.measure), server(s.server), currentTime(s.currentTime), internalTimeBase(s.internalTimeBase) {
 }
 
+Sensor::Sensor(std::string type) {
+    this->type = type;
+    if (type == "Temperature") {
+        this->internalTimeBase = 3;
+    }
+    if (type == "Light") {
+        this->internalTimeBase = 2;
+    }
+}
+
+
 Sensor& Sensor::operator=(const Sensor &s) {
   if (this != &s) {
     this->type = s.type;
