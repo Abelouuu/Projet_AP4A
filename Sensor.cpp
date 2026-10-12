@@ -59,19 +59,4 @@ void Sensor::update(int mode) {
 }
 
 void Sensor::execute(int mode) {
-  // Utilisation de static pour que le générateur aléatoire ne soit instancié qu'une seule fois
-  // et ne génère pas la même valeur si execute() est appelé très vite plusieurs fois.
-  static std::random_device rd;
-  static std::mt19937 gen(rd());
-
-  // Génère un nombre à virgule flottante entre 0.0 et 30.0
-  std::uniform_real_distribution<float> distribution(0.0f, 30.0f);
-
-  this->measure = distribution(gen);
-
-  if (this->server != nullptr) {
-      server->receive(this->measure, this->type, mode);
-  } else {
-      std::cerr << "Attention : Capteur " << this->id << " n'est lié à aucun serveur !" << std::endl;
-  }
 }

@@ -8,14 +8,13 @@
 
 
 class Light: public Sensor {
-
     public:
     Light();
-    Light(const Light&);
+    Light(const Light& light);
 
-    Light& operator=(const Light&);
+    Light& operator=(const Light& light);
 
-
+    void execute(int mode) override;
     ~Light();
 };
 

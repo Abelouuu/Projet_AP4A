@@ -11,18 +11,16 @@
 
 class Sensor {
 private:
-    int id;
-    std::string type;
-    float measure;
-    Server *server;
     int currentTime;
     int internalTimeBase;
-
     static int idcounter;
 protected:
+    int id;
+    std::string measure;
+    Server *server;
+    std::string type;
 
 public:
-    int a;
     Sensor();
     Sensor(std::string type);
     Sensor(const Sensor &s);
@@ -32,7 +30,7 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Sensor& s);
 
     virtual void update(int mode);
-    virtual void execute(int mode);
+    virtual void execute(int mode)=0;
 
     void setServer(Server* s);
 };
