@@ -4,6 +4,8 @@
 #include "../Sensor.h"
 
 class Temperature : public Sensor {
+private:
+    float lastTemp = 10.0f;
 public:
     Temperature();
     Temperature(const Temperature& Tempsensor);

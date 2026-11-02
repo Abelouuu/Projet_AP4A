@@ -1,5 +1,6 @@
 #include "Sound.h"
 #include <random>
+#include <algorithm>
 
 // Utilisation du nouveau constructeur de la classe mère pour fixer la base de temps à 4
 Sound::Sound() : Sensor("Sound", 4) {}
@@ -18,14 +19,17 @@ Sound::~Sound() {}
 void Sound::execute(int mode) {
      static std::random_device rd;
      static std::mt19937 gen(rd());
-     std::uniform_real_distribution<float> distribution(30.0f, 90.0f);
+     std::normal_distribution<float> pas(0.0f, 3.0f);
 
-     // Libération de la mémoire de la précédente mesure
+     const float moyenne = 55.0f;
+     const float rappel  = 0.05f;
+
+     lastSound += rappel * (moyenne - lastSound) + pas(gen);
+     lastSound = std::clamp(lastSound, 30.0f, 90.0f);
+
      delete this->currentData;
+     this->currentData = new SensorData<float>(lastSound, "Db");
 
-     // Création d'une nouvelle donnée générique de type FLOAT avec l'unité "Db"
-     float randomvalue = distribution(gen);
-     this->currentData = new SensorData<float>(randomvalue, "Db");
 
      if (this->server != nullptr) {
           // Envoi au serveur (modifie la signature dans Server si tu passes à un Data*)
