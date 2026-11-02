@@ -16,7 +16,6 @@ public:
     ~Temperature();
 
     void execute(int mode) override;
-    Sensor* clone() override;
 
 };
 

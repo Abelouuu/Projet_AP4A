@@ -33,6 +33,7 @@ Sensor::Sensor(std::string type): id(++idcounter), type(type), measure(""), serv
 
 Sensor& Sensor::operator=(const Sensor &s) {
   if (this != &s) {
+    this->id = s.id;
     this->type = s.type;
     this->measure = s.measure;
     this->server = s.server;

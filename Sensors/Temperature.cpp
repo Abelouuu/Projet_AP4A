@@ -3,7 +3,6 @@
 //
 
 #include "Temperature.h"
-
 #include <iomanip>
 #include <random>
 
@@ -41,8 +40,4 @@ void Temperature::execute(int mode) {
     } else {
         std::cerr << "Attention : Capteur " << this->id << " n'est lié à aucun serveur !" << std::endl;
     }
-}
-
-Sensor* Temperature::clone() {
-    return new Temperature(*this);
 }

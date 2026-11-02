@@ -4,7 +4,6 @@
 
 #include "Light.h"
 #include <random>
-#include <iomanip>
 
 Light::Light(): Sensor("Light") {
 
@@ -21,10 +20,6 @@ Light &Light::operator=(const Light &light) {
 
 Light::~Light() {
 
-}
-
-Sensor* Light::clone() {
-    return new Light(*this);
 }
 
 void Light::execute(int mode) {

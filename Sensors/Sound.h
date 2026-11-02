@@ -15,7 +15,6 @@ public:
     ~Sound();
 
     void execute(int mode) override;
-    Sensor* clone() override;
 };
 
 

@@ -3,7 +3,6 @@
 //
 
 #include "Sound.h"
-
 #include <iomanip>
 #include <random>
 
@@ -38,8 +37,4 @@ void Sound::execute(int mode) {
      } else {
           std::cerr << "Attention : Capteur " << this->id << " n'est lié à aucun serveur !" << std::endl;
      }
-}
-
-Sensor* Sound::clone() {
-     return new Sound(*this);
 }

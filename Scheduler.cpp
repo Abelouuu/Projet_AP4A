@@ -6,47 +6,41 @@
 
 Scheduler::Scheduler(): waiting_time(1000) {
     std::cout << "Un schedule vient d'etre initialisé" << std::endl;
-
 }
-Scheduler::Scheduler(int waiting_time): waiting_time(waiting_time) {
+Scheduler::Scheduler(int delay_ms): waiting_time(delay_ms) {
     std::cout << "Un schedule vient d'etre initialisé" << std::endl;
 }
-Scheduler::Scheduler(const Scheduler &scheduler) {
-        for (Sensor* sensor : scheduler.sensors) {
-            if (sensor != nullptr) { //Si le sensor n'est pas un pointeur nul
-                this->sensors.push_back(sensor->clone()); //On ajoute à la liste de capteurs chaque capteur avec une nouvelle adresse
-            }
-        }
-        this->waiting_time = scheduler.waiting_time;
-    std::cout << "Un schedule vient d'etre copié" << std::endl;
-
+Scheduler::Scheduler(const Scheduler &scheduler): waiting_time(scheduler.waiting_time) {
+    for (Sensor* sensor : scheduler.sensors) {
+        this->sensors.push_back(sensor); // Copie simple du pointeur
+    }
+    for (Server* server : scheduler.servers) {
+        this->servers.push_back(server); // Copie simple du pointeur
+    }
 }
 
 
 Scheduler::~Scheduler() {
-    for (Sensor* sensor : this->sensors) {
-        delete sensor; //Libère la mémoire allouée dynamiquement de chaque capteur
-    }
-    sensors.clear(); //Vide le tableau des pointeurs
+    sensors.clear();
+    servers.clear();
     std::cout << "Un schedule vient d'etre supprimé" << std::endl;
 }
 
 
-Scheduler &Scheduler::operator=(const Scheduler &schedule) {
-    if (this != &schedule) { //On vérifie que les deux Schedulers ne soient pas les mêmes (protection anti auto-affectation)
-        for (Sensor* sensor : this->sensors) {
-            delete sensor; // On libère la mémoire allouée dynamiquement de chaque sensors
-        }
-        this->sensors.clear(); // On vide le tableau des pointeurs
-        for (Sensor* sensor: schedule.sensors) {
-            if (sensor != nullptr) {
-                this->sensors.push_back(sensor->clone()); //On copie les sensors dans le bon scheduler avec de nouvelle allocations (Copie profonde)
-            }
-        }
-        this->waiting_time = schedule.waiting_time;
-    }
+Scheduler &Scheduler::operator=(const Scheduler &scheduler) {
+    if (this != &scheduler) {
+        this->sensors.clear();
+        this->servers.clear();
 
-    return *this; //On renvoie la référence du scheduler qui vient d'être rempli
+        for (Sensor* sensor: scheduler.sensors) {
+            this->sensors.push_back(sensor);
+        }
+        for (Server* server: scheduler.servers) {
+            this->servers.push_back(server);
+        }
+        this->waiting_time = scheduler.waiting_time;
+    }
+    return *this;
 }
 
 int Scheduler::get_waiting_time() const{
@@ -54,8 +48,8 @@ int Scheduler::get_waiting_time() const{
     return this->waiting_time;
 }
 
-void Scheduler::set_waiting_time(int waiting_time) {
-    this->waiting_time = waiting_time;
+void Scheduler::set_waiting_time(int delay_ms) {
+    this->waiting_time = delay_ms;
 }
 
 
@@ -65,15 +59,7 @@ void Scheduler::add_sensor(Sensor *sensor) {
     }
 }
 
-void Scheduler::simulation(int nb_cycles) const {
-    int mode = -1;
-    while (mode != 1 && mode != 0) {
-        std::cout << "Mode d'affichage Console(0) ou File(1): " << std::endl;
-        std::cin >> mode;
-        if (mode != 1 && mode != 0) {
-            std::cout << "Please, enter a valid option" << std::endl;
-        }
-    }
+void Scheduler::simulation(int nb_cycles, int mode) const {
     std::cout << "--Début de la simulation (" << nb_cycles << " cycles)--" << std::endl;
     while (nb_cycles > 0){
 
@@ -91,7 +77,6 @@ void Scheduler::simulation(int nb_cycles) const {
         }
         nb_cycles -= 1;
     }
-
 }
 
 

@@ -15,7 +15,6 @@ class Light: public Sensor {
     Light& operator=(const Light& light);
 
     void execute(int mode) override;
-    Sensor* clone() override;
     ~Light();
 };
 
