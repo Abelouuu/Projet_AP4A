@@ -25,8 +25,8 @@ void Temperature::execute(int mode) {
     const float rappel  = 0.01f;
 
     // Nouvelle valeur = ancienne + retour vers la moyenne + petit bruit
-    lastTemp += rappel * (moyenne - lastTemp) + pas(gen);
-    lastTemp = std::clamp(lastTemp, -30.0f, 50.0f);
+    this->lastTemp += rappel * (moyenne - lastTemp) + pas(gen);
+    this->lastTemp = std::clamp(lastTemp, -30.0f, 50.0f);
 
     delete this->currentData;
     this->currentData = new SensorData<float>(lastTemp, "C");
@@ -34,7 +34,7 @@ void Temperature::execute(int mode) {
     if (this->server != nullptr) {
         // Le serveur recevra le pointeur polymorphe Data*
         // N'oublie pas de modifier la signature de server->receive() dans Server.h et Server.cpp !
-        server->receive(this->currentData->toString(), this->type, mode);
+        server->receive(this->currentData, this->type, mode);
     } else {
         std::cerr << "Attention : Capteur " << this->id << " n'est lié à aucun serveur !" << std::endl;
     }

@@ -22,10 +22,10 @@ void Light::execute(int mode) {
     
     // On crée une nouvelle donnée de type BOOLEAN avec le préfixe "Light"
     bool isLightOn = d(gen);
-    this->currentData = new SensorData<bool>(isLightOn, "LUX");
+    this->currentData = new SensorData<bool>(isLightOn, "Light");
     
     if (this->server != nullptr) {
-        server->receive(this->currentData->toString(), this->type, mode);
+        server->receive(this->currentData, this->type, mode);
     } else {
         std::cerr << "Attention : Capteur " << this->id << " n'est lié à aucun serveur !" << std::endl;
     }

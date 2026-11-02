@@ -24,8 +24,8 @@ void Sound::execute(int mode) {
      const float moyenne = 55.0f;
      const float rappel  = 0.05f;
 
-     lastSound += rappel * (moyenne - lastSound) + pas(gen);
-     lastSound = std::clamp(lastSound, 30.0f, 90.0f);
+     this->lastSound += rappel * (moyenne - lastSound) + pas(gen);
+     this->lastSound = std::clamp(lastSound, 30.0f, 90.0f);
 
      delete this->currentData;
      this->currentData = new SensorData<float>(lastSound, "Db");
@@ -33,7 +33,7 @@ void Sound::execute(int mode) {
 
      if (this->server != nullptr) {
           // Envoi au serveur (modifie la signature dans Server si tu passes à un Data*)
-          server->receive(this->currentData->toString(), this->type, mode);
+          server->receive(this->currentData, this->type, mode);
      } else {
           std::cerr << "Attention : Capteur " << this->id << " n'est lie a aucun serveur !" << std::endl;
      }
