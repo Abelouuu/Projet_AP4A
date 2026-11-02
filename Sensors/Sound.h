@@ -1,22 +1,16 @@
-//
-// Created by Myotte-Duquet on 12/10/2026.
-//
-
 #ifndef AP4ATP1_SOUND_H
 #define AP4ATP1_SOUND_H
+
 #include "../Sensor.h"
 
-
-class Sound : public Sensor{
+class Sound : public Sensor {
 public:
     Sound();
     Sound(const Sound& Soundsensor);
     Sound& operator=(const Sound& Soundsensor);
-    ~Sound();
+    ~Sound() override; // Ajout du mot-clé override par bonne pratique
 
     void execute(int mode) override;
 };
-
-
 
 #endif //AP4ATP1_SOUND_H

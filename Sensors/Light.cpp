@@ -1,45 +1,31 @@
-//
-// Created by abel6 on 10/12/2026.
-//
-
 #include "Light.h"
 #include <random>
 
-Light::Light(): Sensor("Light") {
+// Utilisation du nouveau constructeur de la classe mère pour fixer la base de temps à 2
+Light::Light() : Sensor("Light", 2) {}
 
-}
+Light::Light(const Light &light) : Sensor(light) {}
 
-Light::Light(const Light &light): Sensor(light) {
-
-}
-
-Light &Light::operator=(const Light &light) {
+Light& Light::operator=(const Light &light) {
     this->Sensor::operator=(light);
     return *this;
 }
 
-Light::~Light() {
-
-}
+Light::~Light() {}
 
 void Light::execute(int mode) {
-    bool isLightOn;
-
-    std::random_device rd;
-    std::mt19937 gen(rd());
-
+    static std::random_device rd;
+    static std::mt19937 gen(rd());
     std::bernoulli_distribution d(0.5);
-
-    isLightOn = d(gen);
-
-    if (isLightOn) {
-        this->measure = "Light ON";
-    } else {
-        this->measure = "Light OFF";
-    }
-
+    
+    delete this->currentData;
+    
+    // On crée une nouvelle donnée de type BOOLEAN avec le préfixe "Light"
+    bool isLightOn = d(gen);
+    this->currentData = new SensorData<bool>(isLightOn, "LUX");
+    
     if (this->server != nullptr) {
-        server->receive(this->measure, this->type, mode);
+        server->receive(this->currentData->toString(), this->type, mode);
     } else {
         std::cerr << "Attention : Capteur " << this->id << " n'est lié à aucun serveur !" << std::endl;
     }

@@ -15,4 +15,5 @@ add_executable(ap4atp1 main.cpp
         Sensors/Sound.cpp
         Sensors/Sound.h
         Sensors/Light.cpp
+        Data/Data.h
 )

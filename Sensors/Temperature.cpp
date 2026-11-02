@@ -1,18 +1,11 @@
-//
-// Created by Myotte-Duquet on 12/10/2026.
-//
-
 #include "Temperature.h"
 #include <iomanip>
 #include <random>
 
-Temperature::Temperature(): Sensor("Temperature") {
-    
-}
+// Utilisation du nouveau constructeur de la classe mère pour fixer la base de temps à 3
+Temperature::Temperature() : Sensor("Temperature", 3) {}
 
-Temperature::Temperature(const Temperature &Tempsensor): Sensor(Tempsensor){
-}
-
+Temperature::Temperature(const Temperature &Tempsensor) : Sensor(Tempsensor) {}
 
 Temperature& Temperature::operator=(const Temperature &Tempsensor) {
     if (this != &Tempsensor) {
@@ -21,22 +14,24 @@ Temperature& Temperature::operator=(const Temperature &Tempsensor) {
     return *this;
 }
 
-Temperature::~Temperature(){}
-
+Temperature::~Temperature() {}
 
 void Temperature::execute(int mode) {
-    float randomvalue;
     static std::random_device rd;
     static std::mt19937 gen(rd());
-
     std::uniform_real_distribution<float> distribution(-30.0f, 50.0f);
 
-    randomvalue = distribution(gen);
-    std::ostringstream approxvalue;
-    approxvalue << std::fixed << std::setprecision(2) << randomvalue;
-    this->measure = approxvalue.str()+"C";
+    // On libère l'ancienne mesure pour éviter les fuites mémoire
+    delete this->currentData;
+
+    // On crée une nouvelle donnée de type FLOAT avec l'unité "C"
+    float randomvalue = distribution(gen);
+    this->currentData = new SensorData<float>(randomvalue, "C");
+
     if (this->server != nullptr) {
-        server->receive(this->measure, this->type, mode);
+        // Le serveur recevra le pointeur polymorphe Data*
+        // N'oublie pas de modifier la signature de server->receive() dans Server.h et Server.cpp !
+        server->receive(this->currentData->toString(), this->type, mode);
     } else {
         std::cerr << "Attention : Capteur " << this->id << " n'est lié à aucun serveur !" << std::endl;
     }

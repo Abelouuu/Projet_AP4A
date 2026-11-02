@@ -1,15 +1,10 @@
-//
-// Created by Myotte-Duquet on 12/10/2026.
-//
-
 #include "Sound.h"
-#include <iomanip>
 #include <random>
 
-Sound::Sound(): Sensor("Sound") {}
+// Utilisation du nouveau constructeur de la classe mère pour fixer la base de temps à 4
+Sound::Sound() : Sensor("Sound", 4) {}
 
-Sound::Sound(const Sound &Soundsensor) : Sensor(Soundsensor){
-}
+Sound::Sound(const Sound &Soundsensor) : Sensor(Soundsensor) {}
 
 Sound& Sound::operator=(const Sound &Soundsensor) {
      if (this != &Soundsensor) {
@@ -20,21 +15,22 @@ Sound& Sound::operator=(const Sound &Soundsensor) {
 
 Sound::~Sound() {}
 
-
 void Sound::execute(int mode) {
-     float randomvalue;
      static std::random_device rd;
      static std::mt19937 gen(rd());
-
      std::uniform_real_distribution<float> distribution(30.0f, 90.0f);
 
-     randomvalue = distribution(gen);
-     std::ostringstream approxvalue;
-     approxvalue << std::fixed << std::setprecision(2) << randomvalue;
-     this->measure = approxvalue.str()+ "Db";
+     // Libération de la mémoire de la précédente mesure
+     delete this->currentData;
+
+     // Création d'une nouvelle donnée générique de type FLOAT avec l'unité "Db"
+     float randomvalue = distribution(gen);
+     this->currentData = new SensorData<float>(randomvalue, "Db");
+
      if (this->server != nullptr) {
-          server->receive(this->measure, this->type, mode);
+          // Envoi au serveur (modifie la signature dans Server si tu passes à un Data*)
+          server->receive(this->currentData->toString(), this->type, mode);
      } else {
-          std::cerr << "Attention : Capteur " << this->id << " n'est lié à aucun serveur !" << std::endl;
+          std::cerr << "Attention : Capteur " << this->id << " n'est lie a aucun serveur !" << std::endl;
      }
 }
