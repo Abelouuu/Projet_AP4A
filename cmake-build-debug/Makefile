@@ -176,6 +176,78 @@ Sensor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Sensor.cpp.s
 .PHONY : Sensor.cpp.s
 
+Sensors/Light.obj: Sensors/Light.cpp.obj
+.PHONY : Sensors/Light.obj
+
+# target to build an object file
+Sensors/Light.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Sensors/Light.cpp.obj
+.PHONY : Sensors/Light.cpp.obj
+
+Sensors/Light.i: Sensors/Light.cpp.i
+.PHONY : Sensors/Light.i
+
+# target to preprocess a source file
+Sensors/Light.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Sensors/Light.cpp.i
+.PHONY : Sensors/Light.cpp.i
+
+Sensors/Light.s: Sensors/Light.cpp.s
+.PHONY : Sensors/Light.s
+
+# target to generate assembly for a file
+Sensors/Light.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Sensors/Light.cpp.s
+.PHONY : Sensors/Light.cpp.s
+
+Sensors/Sound.obj: Sensors/Sound.cpp.obj
+.PHONY : Sensors/Sound.obj
+
+# target to build an object file
+Sensors/Sound.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Sensors/Sound.cpp.obj
+.PHONY : Sensors/Sound.cpp.obj
+
+Sensors/Sound.i: Sensors/Sound.cpp.i
+.PHONY : Sensors/Sound.i
+
+# target to preprocess a source file
+Sensors/Sound.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Sensors/Sound.cpp.i
+.PHONY : Sensors/Sound.cpp.i
+
+Sensors/Sound.s: Sensors/Sound.cpp.s
+.PHONY : Sensors/Sound.s
+
+# target to generate assembly for a file
+Sensors/Sound.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Sensors/Sound.cpp.s
+.PHONY : Sensors/Sound.cpp.s
+
+Sensors/Temperature.obj: Sensors/Temperature.cpp.obj
+.PHONY : Sensors/Temperature.obj
+
+# target to build an object file
+Sensors/Temperature.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Sensors/Temperature.cpp.obj
+.PHONY : Sensors/Temperature.cpp.obj
+
+Sensors/Temperature.i: Sensors/Temperature.cpp.i
+.PHONY : Sensors/Temperature.i
+
+# target to preprocess a source file
+Sensors/Temperature.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Sensors/Temperature.cpp.i
+.PHONY : Sensors/Temperature.cpp.i
+
+Sensors/Temperature.s: Sensors/Temperature.cpp.s
+.PHONY : Sensors/Temperature.s
+
+# target to generate assembly for a file
+Sensors/Temperature.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\ap4atp1.dir\build.make CMakeFiles/ap4atp1.dir/Sensors/Temperature.cpp.s
+.PHONY : Sensors/Temperature.cpp.s
+
 Server.obj: Server.cpp.obj
 .PHONY : Server.obj
 
@@ -239,6 +311,15 @@ help:
 	@echo ... Sensor.obj
 	@echo ... Sensor.i
 	@echo ... Sensor.s
+	@echo ... Sensors/Light.obj
+	@echo ... Sensors/Light.i
+	@echo ... Sensors/Light.s
+	@echo ... Sensors/Sound.obj
+	@echo ... Sensors/Sound.i
+	@echo ... Sensors/Sound.s
+	@echo ... Sensors/Temperature.obj
+	@echo ... Sensors/Temperature.i
+	@echo ... Sensors/Temperature.s
 	@echo ... Server.obj
 	@echo ... Server.i
 	@echo ... Server.s
