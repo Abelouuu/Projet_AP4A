@@ -5,14 +5,18 @@
 #include "Sensors/Temperature.h"
 
 int main() {
-    Server serv1 ;
-
+    // Instanciation statique (sur la pile) du serveur et des différents capteurs
+    Server serv1;
     Light lightSensor1;
     Sound SoundSensor;
     Temperature tempsensor;
+
+    // Association de chaque capteur au serveur central (passage par adresse)
     lightSensor1.setServer(&serv1);
     SoundSensor.setServer(&serv1);
     tempsensor.setServer(&serv1);
+
+    // Initialisation de l'ordonnanceur et ajout des entités par agrégation
     Scheduler schedule;
     schedule.add_sensor(&lightSensor1);
     schedule.add_sensor(&SoundSensor);
@@ -29,6 +33,7 @@ int main() {
         }
     }
 
+    // Lancement de la simulation pour 10 cycles avec le mode choisi
     schedule.simulation(10, mode);
 
     return 0;

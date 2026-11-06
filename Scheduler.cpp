@@ -3,35 +3,34 @@
 #include <thread>
 #include <chrono>
 
-
 Scheduler::Scheduler(): waiting_time(1000) {
-    std::cout << "Un schedule vient d'etre initialisé" << std::endl;
+    std::cout << "Un schedule vient d'etre initialise" << std::endl;
 }
+
 Scheduler::Scheduler(int delay_ms): waiting_time(delay_ms) {
-    std::cout << "Un schedule vient d'etre initialisé" << std::endl;
+    std::cout << "Un schedule vient d'etre initialise" << std::endl;
 }
+
 Scheduler::Scheduler(const Scheduler &scheduler): waiting_time(scheduler.waiting_time) {
     for (Sensor* sensor : scheduler.sensors) {
         this->sensors.push_back(sensor); // Copie simple du pointeur
     }
     for (Server* server : scheduler.servers) {
-        this->servers.push_back(server); // Copie simple du pointeur
+        this->servers.push_back(server);
     }
 }
 
-
 Scheduler::~Scheduler() {
+    // On vide les vecteurs sans faire de 'delete' car les objets sont alloués sur la pile dans le main
     sensors.clear();
     servers.clear();
-    std::cout << "Un schedule vient d'etre supprimé" << std::endl;
+    std::cout << "Un schedule vient d'etre supprime" << std::endl;
 }
-
 
 Scheduler &Scheduler::operator=(const Scheduler &scheduler) {
     if (this != &scheduler) {
         this->sensors.clear();
         this->servers.clear();
-
         for (Sensor* sensor: scheduler.sensors) {
             this->sensors.push_back(sensor);
         }
@@ -43,7 +42,7 @@ Scheduler &Scheduler::operator=(const Scheduler &scheduler) {
     return *this;
 }
 
-int Scheduler::get_waiting_time() const{
+int Scheduler::get_waiting_time() const {
     std::cout << "Le temps d'attente est de " << this->waiting_time << std::endl;
     return this->waiting_time;
 }
@@ -52,26 +51,30 @@ void Scheduler::set_waiting_time(int delay_ms) {
     this->waiting_time = delay_ms;
 }
 
-
 void Scheduler::add_sensor(Sensor *sensor) {
-    if (sensor != nullptr) { //On vérifie que sensor ne soit pas un pointeur nul
-        this->sensors.push_back(sensor); //On ajoute l'adresse du sensor à la liste de capteurs de l'objet courant
+    if (sensor != nullptr) { // On vérifie que sensor ne soit pas un pointeur nul
+        this->sensors.push_back(sensor); // On ajoute l'adresse du sensor à la liste de capteurs de l'objet courant
     }
 }
 
 void Scheduler::simulation(int nb_cycles, int mode) const {
-    std::cout << "--Début de la simulation (" << nb_cycles << " cycles)--" << std::endl;
-    while (nb_cycles > 0){
+    std::cout << "--Debut de la simulation (" << nb_cycles << " cycles)--" << std::endl;
+    while (nb_cycles > 0) {
+        std::cout << "--" << nb_cycles << " Restant(s)--" << std::endl;
 
-        std::cout <<"--" << nb_cycles << " Restant(s)--" << std::endl;
+        // Pause du fil d'exécution pour cadencer la simulation selon waiting_time
         std::this_thread::sleep_for(std::chrono::milliseconds(this->waiting_time));
+
+        // Mise à jour de l'horloge interne de chaque capteur enregistré
         for (Sensor* sensor : this->sensors) {
             if (sensor != nullptr) {
                 sensor->update(mode);
             }
         }
+
+        // En mode console (0), on affiche le bilan une seule fois en fin de cycle
         if (mode == 0) {
-            for ( Server* server : this->servers) {
+            for (Server* server : this->servers) {
                 server->consoleWrite();
             }
         }
@@ -79,9 +82,8 @@ void Scheduler::simulation(int nb_cycles, int mode) const {
     }
 }
 
-
 void Scheduler::add_server(Server* server) {
-    if ( server != nullptr) {
+    if (server != nullptr) {
         this->servers.push_back(server);
     }
 }

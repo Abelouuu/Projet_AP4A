@@ -1,5 +1,6 @@
 #include "Sensor.h"
 
+// Initialisation de l'attribut statique de classe
 int Sensor::idcounter = 0;
 
 Sensor::Sensor()
@@ -11,13 +12,15 @@ Sensor::Sensor(std::string type, int timeBase)
     : id(++idcounter), type(type), currentData(nullptr), server(nullptr), currentTime(0), internalTimeBase(timeBase) {
 }
 
+// Constructeur par recopie : génère un nouvel ID pour que la copie reste un capteur unique
 Sensor::Sensor(const Sensor &s)
     : id(++idcounter), type(s.type), currentData(nullptr), server(s.server), currentTime(s.currentTime), internalTimeBase(s.internalTimeBase) {
-    // Attention : on ne copie pas le pointeur Data, on réinitialisera la mesure lors du premier execute()
+    // On ne copie pas le pointeur Data, on réinitialisera la mesure lors du premier execute()
 }
 
 Sensor& Sensor::operator=(const Sensor &s) {
     if (this != &s) {
+        // On copie les paramètres mais on conserve this->id pour garder l'identité du capteur cible
         this->type = s.type;
         this->server = s.server;
         this->currentTime = s.currentTime;
@@ -44,10 +47,12 @@ std::ostream& operator<<(std::ostream& os, const Sensor& s) {
     return os;
 }
 
+// Factorisation de la gestion du temps dans la classe mère
 void Sensor::update(int mode) {
     currentTime++;
+    // Le capteur ne déclenche une mesure que lorsque sa période propre (internalTimeBase) est atteinte
     if (currentTime >= internalTimeBase) {
         currentTime = 0;
-        this->execute(mode);
+        this->execute(mode); // Appel polymorphe de la méthode spécifique à la classe fille
     }
 }

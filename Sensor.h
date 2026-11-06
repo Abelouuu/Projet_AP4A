@@ -9,12 +9,12 @@
 class Sensor {
 private:
     int currentTime;
-    int internalTimeBase;
-    static int idcounter;
+    int internalTimeBase; // Période d'échantillonnage propre au capteur
+    static int idcounter; // Compteur statique partagé pour générer un ID unique par instance
 
 protected:
     int id;
-    Data* currentData; // Remplacement : stocke un pointeur générique au lieu d'un string
+    Data* currentData;
     Server *server;
     std::string type;
 
@@ -22,15 +22,17 @@ protected:
     Sensor(std::string type, int timeBase);
 
 public:
+    // Forme canonique de Coplien
     Sensor();
     Sensor(const Sensor &s);
-    virtual ~Sensor();
-
+    virtual ~Sensor(); // Destructeur virtuel pour gérer le polymorphisme
     Sensor& operator=(const Sensor& s);
+
+    // Surcharge de l'opérateur de flux pour afficher facilement l'état d'un capteur
     friend std::ostream& operator<<(std::ostream& os, const Sensor& s);
 
     virtual void update(int mode);
-    virtual void execute(int mode) = 0;
+    virtual void execute(int mode) = 0; // Méthode virtuelle pure : rend la classe Sensor abstraite
 
     void setServer(Server* s);
 };

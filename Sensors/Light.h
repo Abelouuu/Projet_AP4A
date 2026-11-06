@@ -8,8 +8,9 @@ public:
     Light();
     Light(const Light& light);
     Light& operator=(const Light& light);
-    ~Light() override; // Ajout du mot-clé override par bonne pratique
+    ~Light() override;
     
+    // Redéfinition de la méthode virtuelle pure de Sensor
     void execute(int mode) override;
 };
 

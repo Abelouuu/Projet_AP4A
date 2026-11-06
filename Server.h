@@ -7,20 +7,22 @@
 #include <vector>
 
 class Server {
-    private:
-        std::string name;
-        std::map<std::string, std::vector<Data*>> measurements;
+private:
+    std::string name;
+    // Dictionnaire associant chaque type de capteur à l'historique de ses mesures (Data*)
+    std::map<std::string, std::vector<Data*>> measurements;
 
-    public:
-        Server();
-        Server(const Server& server);
-        ~Server();
-        Server &operator=(const Server& serveur);
+public:
+    // Forme canonique de Coplien
+    Server();
+    Server(const Server& server);
+    ~Server();
+    Server &operator=(const Server& serveur);
 
-        // Retrait des static et adaptation des paramètres
-        void consoleWrite();
-        void fileWrite(const std::string& sensorType, Data* data);
-        void receive(Data* measure,const std::string& type, int mode);
+    // Services d'affichage console, d'export CSV et de réception des mesures
+    void consoleWrite();
+    void fileWrite(const std::string& sensorType, Data* data);
+    void receive(Data* measure, const std::string& type, int mode);
 };
 
 #endif //AP4ATP1_SERVER_H

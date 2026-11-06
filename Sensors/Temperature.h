@@ -5,12 +5,13 @@
 
 class Temperature : public Sensor {
 private:
+    // Mémorise la température précédente pour éviter des sauts de valeurs incohérents
     float lastTemp = 10.0f;
 public:
     Temperature();
     Temperature(const Temperature& Tempsensor);
     Temperature& operator=(const Temperature& Tempsensor);
-    ~Temperature() override; // Ajout du mot-clé override par bonne pratique
+    ~Temperature() override;
 
     void execute(int mode) override;
 };
