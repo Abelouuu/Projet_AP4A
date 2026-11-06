@@ -50,6 +50,9 @@ void Server::receive(Data* measure, const std::string& type, int mode) {
     // Le serveur stocke un CLONE de la donnée pour être indépendant du cycle du capteur
     this->measurements[type].push_back(measure->clone());
 
+    // vérification des seuils critiques à chaque réception
+    measure->checkAlert(type);
+
     if (mode == 1) {
         this->fileWrite(type, measure);
     }
